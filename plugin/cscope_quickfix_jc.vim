@@ -48,13 +48,10 @@ function! s:ExeCscope(...)
         let cmd = "cscope -L -" . cs_opts_2[cs_opt] . " " . pattern 
     else
         echo "option is incorrect"
-    	return
+        return
     endif
 
     " Run the cscope command.
-    if exists("a:3")
-        "let cmd = cmd . " " . a:3
-    endif
     let cs_output = system(cmd)
 
     if cs_output == ""
@@ -76,7 +73,9 @@ function! s:ExeCscope(...)
     for f in cs_output 
         let list_sub = matchlist(f, '^\([^ ]*\)\s\(.*\)\s\([0-9]\+\)\s\(.*\)$', 0)
         if len(list_sub) == 0
-            echo "The list_sub doesn't have item\n"
+            echohl WarningMsg |
+            \ echomsg "The list_sub doesn't have item" |
+            \ echohl None
             return
         endif
         let dict = {'filename':list_sub[1], 'lnum':list_sub[3], 'text':list_sub[4]}
