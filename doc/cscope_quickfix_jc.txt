@@ -1,0 +1,64 @@
+ Overview
+ -----------------------------------------------------------------------------
+ This script puts cscope output to quickfix window, but don't use the cscopequickfix
+ functionality within vim.
+
+ Why make this script?
+ -----------------------------------------------------------------------------
+ Don't use the cscope-quickfix within vim, because this functionality always
+ jump to the first error. In most cases, the fisrt error is not what we want. 
+
+ Preparation
+ -----------------------------------------------------------------------------
+ 1. You must prepare cscope and cscope database (cscope.out file), load your
+    database for vim, see :help cscope.
+ 2. More info about cscope, see cscope home page http://cscope.sourceforge.net/.
+
+ Features
+ -----------------------------------------------------------------------------
+ 1. Create ":Cscope" command, it's similar with "cs find"
+    _todo_ b. Auto load the database(cscope.out file)
+ 2. This script adds keymap macro as follows:
+    <C-\> s: Find this C symbol
+    <C-\> g: Find this definition
+    <C-\> d: Find functions called by this function
+    <C-\> c: Find functions calling this function
+    <C-\> t: Find this text string
+    <C-\> e: Find this egrep pattern
+    <C-\> f: Find this file
+    <C-\> i: Find files #including this file
+
+ Functions
+ -----------------------------------------------------------------------------
+ 1. ExeCscope({type}, {pattern} [,{file}])
+
+ Commands
+ -----------------------------------------------------------------------------
+ 1. Cscope {type} {pattern} [{file}]
+
+ Variables
+ -----------------------------------------------------------------------------
+ 1. g:cs_auto_openqf
+    This variable can control if the quickfix window needs to be open after
+    Cscope command. if don't need, just set it to be 0, default is 1.
+ 2. g:cs_auto_jump
+    This variable can control if need to jump to the first item after running
+    Cscope command.
+ m. Set all of the variables above in your .vimrc, commonly it's $HOME/.vimrc.
+
+ Install
+ -----------------------------------------------------------------------------
+ Copy cscope_quickfix_jc.vim script to $HOME/.vim/plugin directory. 
+
+ FAQ
+ -----------------------------------------------------------------------------
+ 1. The jc suffix in cscope_quickfix_jc.vim is abbreviation of "jump control".
+ 2. how to go back to previous positon atfer quickfix jump?
+    Just Press <C-o>.
+ m. If you get some bugs on this script, please contact me by sxwjean@gmail.com.
+    The item index 'm' means "max index value" of all of items. Becasue I don't
+    know will add how many items, but the "m" item is expected as the last one.
+
+ Others
+ -----------------------------------------------------------------------------
+ 1. Some cscope versions aren't normal with -e option.
